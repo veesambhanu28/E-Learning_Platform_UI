@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>E-Learning Platform</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="course.html">Courses</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Available Courses</h2>
+        <div class="course-list">
+            <div class="course-card">
+                <h3>Python Basics</h3>
+                <p>Learn Python from scratch!</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 50%;">50%</div>
+                </div>
+                <a href="course.html?course=python">View Course</a>
+            </div>
+
+            <div class="course-card">
+                <h3>Web Development</h3>
+                <p>HTML, CSS, and JavaScript essentials</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 20%;">20%</div>
+                </div>
+                <a href="course.html?course=webdev">View Course</a>
+            </div>
+
+            <div class="course-card">
+                <h3>Data Science</h3>
+                <p>Introduction to Pandas and Matplotlib</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 10%;">10%</div>
+                </div>
+                <a href="course.html?course=datasci">View Course</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>E-Learning Platform &copy; 2026</p>
+    </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>E-Learning Platform</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="course.html">Courses</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="course-content">
+            <!-- Dynamic course content will appear here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>E-Learning Platform &copy; 2026</p>
+    </footer>
+
+    <script>
+        // Get course from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const course = urlParams.get('course');
+
+        const courses = {
+            python: {
+                title: "Python Basics",
+                description: "Learn Python from scratch with interactive lessons and video tutorials.",
+                progress: "50%",
+                videos: [
+                    {title: "Lesson 1: Introduction", src: "https://www.youtube.com/embed/_uQrJ0TkZlc"},
+                    {title: "Lesson 2: Loops", src: "https://www.youtube.com/embed/6iF8Xb7Z3wQ"}
+                ]
+            },
+            webdev: {
+                title: "Web Development",
+                description: "Learn HTML, CSS, and JavaScript with hands-on examples.",
+                progress: "20%",
+                videos: [
+                    {title: "Lesson 1: HTML Basics", src: "https://www.youtube.com/embed/pQN-pnXPaVg"},
+                    {title: "Lesson 2: CSS Basics", src: "https://www.youtube.com/embed/yfoY53QXEnI"}
+                ]
+            },
+            datasci: {
+                title: "Data Science",
+                description: "Introduction to Pandas, Matplotlib, and data visualization.",
+                progress: "10%",
+                videos: [
+                    {title: "Lesson 1: Pandas Intro", src: "https://www.youtube.com/embed/zmdjNSmRXF4"},
+                    {title: "Lesson 2: Matplotlib Intro", src: "https://www.youtube.com/embed/3Xc3CA655Y4"}
+                ]
+            }
+        };
+
+        const courseData = courses[course] || courses['python']; // Default to python
+
+        const container = document.getElementById('course-content');
+        container.innerHTML = `
+            <h2>${courseData.title}</h2>
+            <p>${courseData.description}</p>
+            <h3>Progress</h3>
+            <div class="progress-bar">
+                <div class="progress" style="width: ${courseData.progress};">${courseData.progress}</div>
+            </div>
+            ${courseData.videos.map(video => `
+                <h3>${video.title}</h3>
+                <div class="video-container">
+                    <iframe width="560" height="315" src="${video.src}" title="${video.title}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            `).join('')}
+            <button onclick="alert('Certificate will be issued on completion!')">Get Certificate</button>
+        `;
+    </script>
+</body>
+</html>
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+}
+
+.course-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.course-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.course-card h3 {
+    margin-top: 0;
+}
+
+.progress-bar {
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress {
+    background-color: #4CAF50;
+    color: white;
+    padding: 3px;
+    text-align: center;
+}
+
+.video-container {
+    margin: 15px 0;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+}
+
