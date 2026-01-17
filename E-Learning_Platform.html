@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Learning Platform</title>
+
+    <!-- ===== CSS (Embedded) ===== -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .course-list {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .course-card {
+            background: white;
+            padding: 15px;
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            background: #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 3px;
+        }
+
+        .video-container {
+            margin-top: 15px;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>E-Learning Platform</h1>
+    <nav>
+        <a href="#" onclick="showHome()">Home</a>
+        <a href="#" onclick="showCourse('python')">Courses</a>
+    </nav>
+</header>
+
+<main id="content">
+    <!-- HOME CONTENT -->
+    <h2>Available Courses</h2>
+
+    <div class="course-list">
+        <div class="course-card">
+            <h3>Python Basics</h3>
+            <p>Learn Python from scratch</p>
+            <div class="progress-bar">
+                <div class="progress" style="width:50%">50%</div>
+            </div>
+            <button onclick="showCourse('python')">View Course</button>
+        </div>
+
+        <div class="course-card">
+            <h3>Web Development</h3>
+            <p>HTML, CSS, JavaScript</p>
+            <div class="progress-bar">
+                <div class="progress" style="width:20%">20%</div>
+            </div>
+            <button onclick="showCourse('webdev')">View Course</button>
+        </div>
+
+        <div class="course-card">
+            <h3>Data Science</h3>
+            <p>Pandas & Matplotlib</p>
+            <div class="progress-bar">
+                <div class="progress" style="width:10%">10%</div>
+            </div>
+            <button onclick="showCourse('datasci')">View Course</button>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 E-Learning Platform</p>
+</footer>
+
+<!-- ===== JavaScript (Embedded) ===== -->
+<script>
+const courses = {
+    python: {
+        title: "Python Basics",
+        desc: "Learn Python from scratch with videos.",
+        progress: "50%",
+        video: "https://www.youtube.com/embed/_uQrJ0TkZlc"
+    },
+    webdev: {
+        title: "Web Development",
+        desc: "HTML, CSS and JavaScript fundamentals.",
+        progress: "20%",
+        video: "https://www.youtube.com/embed/pQN-pnXPaVg"
+    },
+    datasci: {
+        title: "Data Science",
+        desc: "Introduction to Pandas and Matplotlib.",
+        progress: "10%",
+        video: "https://www.youtube.com/embed/zmdjNSmRXF4"
+    }
+};
+
+function showHome() {
+    location.reload();
+}
+
+function showCourse(courseKey) {
+    const c = courses[courseKey];
+
+    document.getElementById("content").innerHTML = `
+        <h2>${c.title}</h2>
+        <p>${c.desc}</p>
+
+        <div class="progress-bar">
+            <div class="progress" style="width:${c.progress}">
+                ${c.progress}
+            </div>
+        </div>
+
+        <div class="video-container">
+            <iframe width="560" height="315" src="${c.video}" allowfullscreen></iframe>
+        </div>
+
+        <button onclick="alert('Certificate will be issued after completion!')">
+            Get Certificate
+        </button>
+
+        <br><br>
+        <button onclick="showHome()">⬅ Back</button>
+    `;
+}
+</script>
+
+</body>
+</html>
